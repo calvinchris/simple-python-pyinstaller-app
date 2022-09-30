@@ -11,7 +11,7 @@ node {
                 junit 'test-reports/results.xml'
             }
         }
-        docker.image('cdrx/pyinstaller-linux:python2').inside('-v $(pwd)/sources:/src') {
+        docker.image('cdrx/pyinstaller-linux:python2').inside {
             stage('Deliver') {
                 dir('env.BUILD_ID') {
                     unstash 'compiled-result' 
