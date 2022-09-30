@@ -11,5 +11,15 @@ node {
                 junit 'test-reports/results.xml'
             }
         }
+        docker.image('cdrx/pyinstaller-linux:python2').inside('-v $(pwd)/sources:/src') {
+            stage('Deliver') {
+                dir('env.BUILD_ID') {
+                    unstash 'compiled-result' 
+                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F add2vals.py'"
+                }
+                sh 'pyinstaller --onefile sources/add2vals.py'
+                archiveArtifacts artifacts: 'dist/add2vals', followSymlinks: false
+            }
+        }
         
 }
