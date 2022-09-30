@@ -11,7 +11,7 @@ node {
                 junit 'test-reports/results.xml'
             }
         }
-        docker.image('cdrx/pyinstaller-linux:python2').inside {
+        withDockerContainer('cdrx/pyinstaller-linux:python2') {
             stage('Deliver') {
                 sh 'pyinstaller --onefile sources/add2vals.py'
             }
