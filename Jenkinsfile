@@ -8,12 +8,8 @@ node {
         docker.image('qnib/pytest:latest').inside {
             stage('Test') {
                 sh 'py.test --junit-xml test-reports/results.xml sources/test_calc.py'
+                junit 'test-reports/results.xml'
             }
-            post {
-                    always {
-                        junit 'test-reports/results.xml'
-                    }
-                }
         }
         
 }
