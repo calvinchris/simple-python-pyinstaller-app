@@ -13,7 +13,6 @@ node {
         }
         docker.image('cdrx/pyinstaller-linux:python2').inside {
             stage('Deliver') {
-                unstash 'compiled-result' 
                 sh 'pyinstaller --onefile sources/add2vals.py'
                 archiveArtifacts artifacts: 'dist/add2vals', followSymlinks: false
             }
