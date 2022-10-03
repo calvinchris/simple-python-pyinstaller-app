@@ -1,8 +1,5 @@
 pipeline {
     agent none
-    options {
-        skipStagesAfterUnstable()
-    }
     stages {
         stage('Build') {
             agent {
@@ -15,19 +12,20 @@ pipeline {
                 stash(name: 'compiled-results', includes: 'sources/*.py*')
             }
         }
-        stage('Test') {
+        stage('Test') { 
             agent {
                 docker {
-                    image 'qnib/pytest'
+                    image 'qnib/pytest' 
                 }
             }
             steps {
-                sh 'py.test --junit-xml test-reports/results.xml sources/test_calc.py'
+                sh 'py.test --junit-xml test-reports/results.xml sources/test_calc.py' 
             }
             post {
                 always {
-                    junit 'test-reports/results.xml'
+                    junit 'test-reports/results.xml' 
                 }
             }
         }
-       
+    }
+}
