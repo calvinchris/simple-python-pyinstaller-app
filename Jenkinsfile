@@ -14,10 +14,10 @@ node {
         stage('Deploy') {
                 
                 docker.image('cdrx/pyinstaller-linux:python2') {
-                withEnv(['VOLUME = \'$(pwd)/sources:/src\'', 'IMAGE = \'cdrx/pyinstaller-linux:python2\'']) {
+                withEnv(['VOLUME = \'$(pwd)/sources:/src\', 'IMAGE = \'cdrx/pyinstaller-linux:python2\'']) {
                     sh 'docker run --rm -v ${VOLUME} ${IMAGE}'
                     sh 'pyinstaller -F add2vals.py'
-                    archiveArtifacts artifacts: 'sources/dist/add2vals', followSymlinks: false
+                    archiveArtifacts artifacts: 'sources/dist/add2vals'
                 }
             }
         }
