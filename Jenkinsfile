@@ -12,8 +12,8 @@ node {
             }
         }
         stage('Deploy') {
-            withDockerContainer(args:'-v $(pwd)/sources:/src', image:'cdrx/pyinstaller-linux:python2') {
-                sh "pyinstaller -F add2vals.py"
+            withDockerContainer('cdrx/pyinstaller-linux:python2') {
+                sh 'docker run -v "$(pwd):/src/" cdrx/pyinstaller-linux "pyinstaller your-script.py"'
                 archiveArtifacts artifacts: '${env.BUILD_ID}/sources/dist/add2vals', followSymlinks: false
             }
         }
