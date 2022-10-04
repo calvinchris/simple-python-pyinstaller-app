@@ -12,9 +12,9 @@ node {
             }
         }
         stage('Deploy') {
-            docker.image('cdrx/pyinstaller-linux:python2').inside {
+            withDockerContainer('cdrx/pyinstaller-linux:python2') {
                 unstash 'compiled-results'
-                sh "docker run --rm cdrx/pyinstaller-linux:python2 'pyinstaller -F add2vals.py'"
+                sh "pyinstaller -F add2vals.py'"
                 archiveArtifacts artifacts: '${env.BUILD_ID}/sources/dist/add2vals', followSymlinks: false
             }
         }
