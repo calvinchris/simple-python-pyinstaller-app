@@ -13,7 +13,7 @@ node {
         }
         stage('Deploy') {          
                 sh 'docker run --rm -v "$(pwd):/src" cdrx/pyinstaller-linux'
-                sh 'pyinstaller --onefile sources/add2vals.py'
+                sh 'pyinstaller -F sources/add2vals.py'
         }
 }
 
