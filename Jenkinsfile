@@ -13,7 +13,7 @@ node {
         }
         stage('Deploy') { 
                 sh 'mkdir /src'               
-                sh 'docker run --rm -v "$(pwd)sources:/src" cdrx/pyinstaller-linux'
+                sh 'docker run --rm -v "$(pwd)sources/:/src" cdrx/pyinstaller-linux'
                 sh 'pyinstaller -F /src/add2vals.py'
         }
 }
