@@ -13,8 +13,9 @@ node {
         }
         stage('Deploy') {
             docker.image('cdrx/pyinstaller-linux:python2').inside {                
-                sh 'docker run cdrx/pyinstaller-linux pyinstaller -F add2vals.py'
-                archiveArtifacts '/dist/add2vals'
+                stage('01') {
+                    sh 'echo STAGE01'
+                }
             }
         }
 }
