@@ -12,7 +12,7 @@ node {
             }
         }
         stage('Deploy') {
-            docker.image('cdrx/pyinstaller-linux:python2').inside {
+            withDockerContainer('cdrx/pyinstaller-linux:python2') {
                 sh 'docker run --rm -v $(pwd)/sources:/src cdrx/pyinstaller-linux:python2'
             }
         }
