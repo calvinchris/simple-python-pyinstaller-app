@@ -11,6 +11,9 @@ node {
                 junit 'test-reports/results.xml'
             }
         }
+        stage('Manual Approval') {
+            input message: 'Lanjutkan ke tahap Deploy?', ok: 'proceed'
+        }
         stage('Deploy') {      
                 unstash 'compiled-results'    
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
