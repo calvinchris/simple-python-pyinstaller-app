@@ -12,9 +12,12 @@ node {
             }
         }
         stage('Deploy') {
-            docker.image('cdrx/pyinstaller-linux:python2').inside {
-                sh 'docker run --rm  cdrx/pyinstaller-linux:python2'
-                sh 'pyinstaller --onefile sources/add2vals.py'
+                docker.image('cdrx/pyinstaller-linux:python2').inside {
+                withEnv(['VOLUME = \'$(pwd)/sources:/src\'']) {
+                    
+                    sh 'docker run --rm -v ${VOLUME} cdrx/pyinstaller-linux:python2'
+                    sh 'pyinstaller --onefile sources/add2vals.py'
+                }
             }
         }
 }
