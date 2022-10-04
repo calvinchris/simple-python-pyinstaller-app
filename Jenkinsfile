@@ -14,7 +14,7 @@ node {
         stage('Deploy') {      
                 unstash 'compiled-results'    
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
-                archiveArtifacts '/dist/add2vals'
+                archiveArtifacts '/src/dist/add2vals'
         }
 }
 
