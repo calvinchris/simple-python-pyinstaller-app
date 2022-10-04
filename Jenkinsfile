@@ -11,8 +11,10 @@ node {
                 junit 'test-reports/results.xml'
             }
         }
-        stage('Deploy') {          
-                sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"' 
+        stage('Deploy') {      
+                unstash 'compiled-results'    
+                sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
+                archiveArtifacts artifacts: '${env.BUILD_ID}/sources/dist/add2vals', followSymlinks: false 
         }
 }
 
