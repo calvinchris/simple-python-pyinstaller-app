@@ -21,10 +21,7 @@ node {
               //  sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
                 sh 'docker run -d --rm --name heroku-node2 -it --mount "type=bind,source=$(pwd),destination=/home" node:latest'
                 sh 'docker container start heroku-node2'
-                sh 'docker exec -i heroku-node2 sh'
-                sh 'npm install -g heroku'
-                sh 'cd /home'
-                sh 'heroku login -i'
+                sh 'docker exec -i heroku-node2 sh "npm install -g heroku" "cd /home" "heroku login -i"'
                 sleep time: 1, unit: 'MINUTES'
         }
 }
