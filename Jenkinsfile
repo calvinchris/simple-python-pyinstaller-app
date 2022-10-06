@@ -12,7 +12,7 @@ node {
             }
         }
         stage('Manual Approval') {
-            input message: 'Lanjutkan ke tahap Deploy?', ok: 'proceed'
+            input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
         }
         stage('Deploy') {      
                 unstash 'compiled-results'    
