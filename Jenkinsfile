@@ -20,6 +20,12 @@ node {
                 archiveArtifacts 'sources/dist/add2vals'
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
                 sleep time: 1, unit: 'MINUTES'
+                docker.image('node:latest').inside {
+                    sh 'npm install -g heroku'
+                    sh 'cd /home'
+                    sh 'heroku login -i'
+                }
+                sleep time: 1, unit: 'MINUTES'
         }
 }
 
