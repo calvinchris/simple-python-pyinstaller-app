@@ -19,9 +19,9 @@ node {
               //  sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
               //  archiveArtifacts 'sources/dist/add2vals'
               //  sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
-                sh 'docker run -d --rm --name heroku-node2 -it --mount "type=bind,source=$(pwd),destination=/home" node:latest'
-                sh 'docker container start heroku-node2'
-                sh 'docker exec -i heroku-node2 sh "npm install -g heroku" "cd /home" "heroku login -i"'
+                sh 'docker run -d --rm --name heroku-node3 -it --mount "type=bind,source=$(pwd),destination=/home" node:latest'
+                sh 'docker container start heroku-node3'
+                sh 'docker exec -i heroku-node3 sh "npm install -g heroku" "cd /home" "heroku login -i"'
                 sleep time: 1, unit: 'MINUTES'
         }
 }
