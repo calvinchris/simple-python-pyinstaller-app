@@ -21,7 +21,7 @@ node {
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
                 sh 'docker run -d --rm --name heroku-node -it --mount "type=bind,source=$(pwd),destination=/home" node:latest'
                 sh 'docker container start heroku-node'
-                sh 'docker exec -it heroku-node /bin/bash'
+                sh 'docker exec -it heroku-node sh'
                 sh 'npm install -g heroku'
                 sh 'cd /home'
                 sh 'heroku login -i'
