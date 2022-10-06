@@ -19,7 +19,7 @@ node {
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
                 archiveArtifacts 'sources/dist/add2vals'
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
-                sh 'docker run -d --name node -it --mount "type=bind,source=$(pwd)/simple-python-pyinstaller-app,destination=/home"' 
+                sh 'docker run -d --name node -it --mount "type=bind,source=$(pwd),destination=/home" node:latest'
                 sh 'docker container start node && docker exec -it node bash'
                 sh 'npm install -g heroku'
                 sh 'cd /home'
