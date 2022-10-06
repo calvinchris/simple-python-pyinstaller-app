@@ -19,12 +19,11 @@ node {
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
                 archiveArtifacts 'sources/dist/add2vals'
                 sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
-                sleep time: 1, unit: 'MINUTES'
-                docker.image('node:latest').inside {
-                    sh 'npm install -g heroku'
-                    sh 'cd /home'
-                    sh 'heroku login -i'
-                }
+                sh 'docker run -d --name node -it --mount "type=bind,source=$(pwd)/simple-python-pyinstaller-app,destination=/home"' 
+                sh 'docker container start node && docker exec -it node bash'
+                sh 'npm install -g heroku'
+                sh 'cd /home'
+                sh 'heroku login -i'
                 sleep time: 1, unit: 'MINUTES'
         }
 }
