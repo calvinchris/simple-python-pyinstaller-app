@@ -19,7 +19,6 @@ node {
               //  sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
               //  archiveArtifacts 'sources/dist/add2vals'
               //  sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
-                sh 'npm install -g heroku'
                 sh 'cd /var/jenkins_home/workspace/simple-python-pyinstaller-app/'
                 sleep time: 1, unit: 'MINUTES'
         }
