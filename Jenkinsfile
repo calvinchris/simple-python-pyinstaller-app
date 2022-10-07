@@ -15,10 +15,10 @@ node {
             input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
         }
         stage('Deploy') {      
-              //  unstash 'compiled-results'    
-              //  sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
-              //  archiveArtifacts 'sources/dist/add2vals'
-              //  sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
+                unstash 'compiled-results'    
+                sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "pyinstaller -F /src/add2vals.py"'
+                archiveArtifacts 'sources/dist/add2vals'
+                sh 'docker run --rm -v "$(pwd)/sources:/src" cdrx/pyinstaller-linux "rm -rf /src/build /src/dist"'
                 dir('/home/simple-python-pyinstaller-app') {
                     sh 'git init'
                     sh 'heroku git:remote -a "hidden-spire-45548"'
