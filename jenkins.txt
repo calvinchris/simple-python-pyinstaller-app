@@ -54,3 +54,5 @@ pipeline {
 
 
 archiveArtifacts artifacts: '${env.BUILD_ID}/sources/dist/add2vals', followSymlinks: false
+
+input message: 'Manual Approval untuk melanjutkan ke proses Deploy ? ', ok: 'Lanjutkan'
